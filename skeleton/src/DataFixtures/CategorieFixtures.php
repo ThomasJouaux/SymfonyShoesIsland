@@ -8,6 +8,12 @@ use Doctrine\Persistence\ObjectManager;
 
 class CategorieFixtures extends Fixture
 {
+    public function getDependencies()
+    {
+        return [
+            CategorieFixtures::class,
+        ];
+    }
     public function load(ObjectManager $manager): void
     {
         
@@ -17,7 +23,7 @@ class CategorieFixtures extends Fixture
             $categorieHomme->setCategorieNom("Categorie : ".$value)
                             ->setCategorieType("Homme")
                             ->setCategorieImg('http://placehold.it/350x150');
-    
+            
             $manager->persist($categorieHomme);
 
             $categorieFemme = new Categorie();
@@ -34,7 +40,9 @@ class CategorieFixtures extends Fixture
 
             $manager->persist($categorieEnfant);
 
-          
+            $this->setReference($value, $categorieHomme);
+
+        
         }
         $nomCategorieAccessoire = array("Lacets" , "Cirage" , "Semelles" );
      
@@ -49,5 +57,7 @@ class CategorieFixtures extends Fixture
     
         }
         $manager->flush();
+        
     }
+    
 }

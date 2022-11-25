@@ -4,12 +4,16 @@ namespace App\Entity;
 
 use App\Controller\ShoesIslandController;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
 class Categorie
 {
+    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'categorie')]
+    private $produits;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -65,5 +69,13 @@ class Categorie
         $this->categorieImg = $categorieImg;
 
         return $this;
+    }
+
+     /**
+     * @return Collection|Produit[]
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
     }
 }

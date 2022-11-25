@@ -4,10 +4,17 @@ namespace App\DataFixtures;
 
 use App\Entity\Produit;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class ProduitFixtures extends Fixture
+class ProduitFixtures extends Fixture implements DependentFixtureInterface
 {
+    public function getDependencies()
+    {
+        return [
+            CategorieFixtures::class,
+        ];
+    }
     public function load(ObjectManager $manager): void
     {
         $typeProduit = array('Sneakers' => 'a' , 'Chaussure de Ville' => 'b' , 'Chaussure haut de gamme' => 'c' , 'Chaussure de sport' => 'd'  );
@@ -31,7 +38,8 @@ class ProduitFixtures extends Fixture
             ->setTypeProduit($randTypeProduit)
             ->setQteStock(rand($qteStockMin , $qteStockMax))
             ->setPrixProduit(rand($prixMin , $prixMax))
-            ->setCouleurProduit($randCouleurProduit);
+            ->setCouleurProduit($randCouleurProduit)
+            ->setCategory($this->getReference("Sneakers"));
             $manager->persist($produit);
         }
 

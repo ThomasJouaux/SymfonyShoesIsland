@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
 {
+    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'categorie')]
+    private $categorie;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -135,6 +138,17 @@ class Produit
     public function setImgProduit(string $imgProduit): self
     {
         $this->imgProduit = $imgProduit;
+
+        return $this;
+    }
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategory(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

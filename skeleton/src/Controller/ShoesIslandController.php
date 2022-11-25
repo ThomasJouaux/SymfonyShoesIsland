@@ -68,41 +68,15 @@ class ShoesIslandController extends AbstractController
 
 // Produit //
 
-#[Route('shoesIsland/categorieHomme/{produit}', name: 'app_produit')]
-public function produit(Produit $produit, ProduitRepository $repo): Response
+#[Route('shoesIsland/categorieHomme/{categorieId}', name: 'app_produit')]
+public function produit(int $categorieId, CategorieRepository $repo): Response
 {
-    $produits = $repo->findBy(array('produitType' => 'Sneakers'));
+   $categorie = $repo -> find($categorieId);
     // dd($produit);
     return $this->render('shoesIsland/ProduitHomme.html.twig', [
-        'produit' => $produit,
-        'produits' => $produits,
+        'categorie' => $categorie,
     ]);
 }
-public function produit1(Produit $produit1, ProduitRepository $repo): Response
-{
-    $produits1 = $repo->findBy(array('produitType' => 'Chaussure de Ville'));
-    // dd($produit);
-    return $this->render('shoesIsland/ProduitHomme.html.twig', [
-        'produit1' => $produit1,
-        'produits1' => $produits1,
-    ]);
-}
-public function produit2(Produit $produit2, ProduitRepository $repo): Response
-{
-    $produits2 = $repo->findBy(array('produitType' => 'Chaussure de sport'));
-    // dd($produit);
-    return $this->render('shoesIsland/CategorieHomme/ProduitHomme.html.twig', [
-        'produit2' => $produit2,
-        'produits2' => $produits2,
-    ]);
-}
-public function produit3(Produit $produit3, ProduitRepository $repo): Response
-{
-    $produits3 = $repo->findBy(array('produitType' => 'Chaussure haut de gamme'));
-    // dd($produit);
-    return $this->render('shoesIsland/CategorieHomme/ProduitHomme.html.twig', [
-        'produit3' => $produit3,
-        'produits3' => $produits3,
-    ]);
-}
+
+
 }
