@@ -11,8 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
 class Categorie
 {
-    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'categorie')]
-    private $produits;
+
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -28,6 +27,15 @@ class Categorie
 
     #[ORM\Column(length: 255)]
     private ?string $categorieImg = null;
+
+    #[ORM\OneToMany(mappedBy: 'Categorie', targetEntity: SousCategorie::class)]
+    private Collection $sousCategories;
+
+    public function __construct()
+    {
+        $this->sousCategories = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -71,11 +79,36 @@ class Categorie
         return $this;
     }
 
-     /**
-     * @return Collection|Produit[]
+    /**
+     * @return Collection<int, SousCategorie>
      */
-    public function getProduits(): Collection
+    public function getSousCategories(): Collection
     {
-        return $this->produits;
+        return $this->sousCategories;
     }
+
+    public function addSousCategory(SousCategorie $sousCategory): self
+    {
+        if (!$this->sousCategories->contains($sousCategory)) {
+            $this->sousCategories->add($sousCategory);
+            $sousCategory->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSousCategory(SousCategorie $sousCategory): self
+    {
+        if ($this->sousCategories->removeElement($sousCategory)) {
+            // set the owning side to null (unless already changed)
+            if ($sousCategory->getCategorie() === $this) {
+                $sousCategory->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
+  
 }

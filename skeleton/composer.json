@@ -66,6 +66,13 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+         "fixtures":
+        [ 
+            "php bin/console d:d:d --force --if-exists",
+            "php bin/console d:d:c",
+            "php bin/console d:s:u --force",
+            "php bin/console d:f:l --append"  
         ]
     },
     "conflict": {
@@ -77,4 +84,6 @@
             "require": "6.1.*"
         }
     }
+   
+    
 }
