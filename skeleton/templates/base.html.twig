@@ -17,77 +17,40 @@
 		<link
 		href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		<link rel="stylesheet" href="/css/style.css">
 		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}
-			<link rel="stylesheet" href="/css/style.css">
+			{# {{ encore_entry_link_tags('app') }} #}
 		{% endblock %}
 
-		
+
 	</head>
 
-	{% block header %}
 		<body>
 
-			<header>
-                <div class="container-fluid" bis_skin_checked="1">
-                    <div class="row">
-				<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-						<a class="navbar-brand col-10" href="/">Bienvenue Chez Shoes Island !</a>
-						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarColor02" bis_skin_checked="1">
-                            
-							<ul class="navbar-nav me-auto">
-                                <li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle a_img_co col-2" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="img\LogoConnexion-removebg-preview.png" alt="connexion" class="img_connexion"></a>
-									<div class="dropdown-menu" bis_skin_checked="1">
-										<a class="dropdown-item" href="#">Connexion</a>
-										<a class="dropdown-item" href="#">Inscription</a>
-										<div class="dropdown-divider" bis_skin_checked="1"></div>
-										<a class="dropdown-item" href="#">Nous contactez</a>
-								</div>
-                            </li>
-                            </ul>
-                            </div>
-                        </div>
-                         <div class="row justify-content-start">
-                        <a href="/CategorieHomme" class="btn_navbar col-3 btn btn-secondary"><button type="button" class="btn btn-secondary" >Hommes</button></a>
-                        <a href="/CategorieFemme" class="btn_navbar col-3 btn btn-secondary"><button type="button"  class="btn btn-secondary" >Femmes</button></a>
-                        <a href="/CategorieEnfant" class="btn_navbar col-3 btn btn-secondary"><button type="button"  class="btn btn-secondary" >Enfants</button></a>
-                        <a href="/CategorieAccessoire" class="btn_navbar col-3 btn btn-secondary"><button type="button"  class="btn btn-secondary" >Accessoires</button></a>
+		{{ render(controller('App\\Controller\\NavController::index')) }}
 
-                        </div>
-                            
-                       
-                        	
-                    </div>
-                </nav>
-					
-			</header>
-		{% endblock  %}
-        
-		{% block body %}
-        {% endblock %}
 
-        {%  block footer %}
-            <footer>    
+{% block body %}{% endblock %}
 
-               
-                    <div id="main"></div>
-                    <div class="row footer_content bg-dark ">
-                        <a href="#" class="txt_cgu">CGU</a>
-                    </div>
-             
-            </footer>
-        {% endblock %}
+
+<footer>
+
+
+	<div id="main"></div>
+	<div class="row footer_content bg-dark ">
+		<a href="#" class="txt_cgu">CGU</a>
+	</div>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script></body></html>
+<script src="/js/script.js" type="text/javascript"></script>
+
 {% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
-            <script src="/js/script.js" type="text/javascript"></script>
-		{% endblock %}
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-	</body>
+{{ encore_entry_script_tags('app') }}
+{% endblock %}
 
 
+</body>
 </html>
-

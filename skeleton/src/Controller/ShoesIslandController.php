@@ -3,85 +3,48 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
-use App\Repository\ProduitRepository;
 use App\Entity\Categorie;
+use App\Repository\ProduitRepository;
 use App\Repository\CategorieRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\SousCategorieRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ShoesIslandController extends AbstractController
 {
     #[Route('/', name: 'app_shoes_island')]
-    public function index(): Response
+    public function index(CategorieRepository $repo): Response
     {
+        $categories = $repo->findAll();
+
+
         return $this->render('shoesIsland/index.html.twig', [
             'controller_name' => 'ShoesIslandController',
+            'categories' => $categories,
+
         ]);
     }
 
-    #[Route('/CategorieHomme' , name:'app_categorieHomme')]
-    public function categorieHomme(CategorieRepository $repo):Response
+    #[Route('/categorie/{id}', name: 'app_categorie')]
+    public function categorie(SousCategorieRepository $repo, $id): Response
     {
-         $categories = $repo -> findBy(array('categorieType' => 'Homme'));
+        $liste = $repo->findBy([ "Categorie" => $id]);
 
-        return $this->render('shoesIsland/CategorieHomme.html.twig' , [
-            'controller_name' => 'ShoesIslandController',
-            'categories' => $categories,
-        ]);
-
-    }
-
-    #[Route('/CategorieFemme' , name:'app_categorieFemme')]
-    public function categorieFemme(CategorieRepository $repo):Response
-    {
-         $categories = $repo->findBy(array('categorieType' => 'Femme'));
-
-        return $this->render('shoesIsland/CategorieFemme.html.twig' , [
-            'controller_name' => 'ShoesIslandController',
-            'categories' => $categories,
-        ]);
-
-    }   
-        
-        #[Route('/CategorieEnfant' , name:'app_categorieEnfant')]
-        public function categorieEnfant(CategorieRepository $repo):Response
-    {
-         $categories = $repo->findBy(array('categorieType' => 'Enfant'));
-    
-        return $this->render('shoesIsland/CategorieEnfant.html.twig' , [
-            'controller_name' => 'ShoesIslandController',
-            'categories' => $categories,
+        // dd($categorie);
+        return $this->render('shoesIsland/categorie.html.twig', [
+            'liste' => $liste
         ]);
     }
-        
-    #[Route('/CategorieAccessoire' , name:'app_categorieAccessoire')]
-    public function categorieAccessoire(CategorieRepository $repo):Response
-{
-     $categories = $repo->findBy(array('categorieType' => 'Accessoire'));
 
-    return $this->render('shoesIsland/CategorieAccessoire.html.twig' , [
-        'controller_name' => 'ShoesIslandController',
-        'categories' => $categories,
-    ]);
-}
+    #[Route('/produits/{id}', name: 'app_produits')]
+    public function produits(ProduitRepository $repo, $id): Response
+    {
+        $liste = $repo->findBy([ "SousCategorie" => $id]);
 
-// Produit //
-
-#[Route('shoesIsland/categorieHomme/{produitId}', name: 'app_produit')]
-public function produitSneakers(int $produitId, ProduitRepository $repo): Response
-{ 
-   $produit = $repo -> findBy(array('typeProduit'=>'Sneakers'));
-    return $this->render('shoesIsland/ProduitHomme.html.twig', [
-        'produits' => $produit,
-    ]);
-}
-public function produitHautDeGamme(int $produitId, ProduitRepository $repo): Response
-{ 
-   $produit = $repo -> findBy(array('typeProduit'=>'Chaussure haut de gamme'));
-    return $this->render('shoesIsland/ProduitHomme.html.twig', [
-        'produits' => $produit,
-    ]);
-}
-
+        // dd($categorie);
+        return $this->render('shoesIsland/produit.html.twig', [
+            'liste' => $liste
+        ]);
+    }
 }

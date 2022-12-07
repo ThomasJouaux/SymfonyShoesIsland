@@ -18,7 +18,7 @@ class SousCategorieRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, SousCategoire::class);
+        parent::__construct($registry, SousCategorie::class);
     }
 
     public function save(SousCategorie $entity, bool $flush = false): void
