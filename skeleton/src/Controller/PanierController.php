@@ -12,16 +12,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PanierController extends AbstractController
 {
     #[Route('/add/{id}', name: 'app_add')]
-    public function add(SessionInterface $session,ProduitRepository $produit , int $id ): Response
+    public function add(SessionInterface $session,Produit $produit ): Response
     {
-        $produit = $id;
-
         $tab=$session->get("panier",[]);
 
-        $tab[] = $id;
+        $tab[] = $produit;
 
         $session->set("panier", $tab);
-
 
         return $this->redirect("/panier");
     }
