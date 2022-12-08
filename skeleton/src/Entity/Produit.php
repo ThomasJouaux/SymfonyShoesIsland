@@ -42,6 +42,9 @@ class Produit
     #[ORM\ManyToOne(inversedBy: 'produits')]
     private ?SousCategorie $SousCategorie = null;
 
+    #[ORM\Column]
+    private ?int $tvaProduit = null;
+
 
 
 
@@ -156,6 +159,18 @@ class Produit
     public function setSousCategorie(?SousCategorie $SousCategorie): self
     {
         $this->SousCategorie = $SousCategorie;
+
+        return $this;
+    }
+
+    public function getTvaProduit(): ?int
+    {
+        return $this->tvaProduit;
+    }
+
+    public function setTvaProduit(int $tvaProduit): self
+    {
+        $this->tvaProduit = $tvaProduit;
 
         return $this;
     }

@@ -3,9 +3,16 @@ html,body{
     padding:0;
     height:100%;
 }
+.footer_content{
+    position:fixed;
+   bottom: 0 !important;  /* on le colle en bas */
+   width:100%;
+   height:100px;   /* Hauteur du pied de page */
+   margin: 0;
+}
 #main {
     min-height:100%;
-    position:relative;
+    position:absolute;
     padding-bottom:100px;   /* Hauteur du pied de page */
     visibility: hidden;
  }
@@ -20,12 +27,6 @@ html,body{
 .btn_navbar{
     display: inline;
     
-}
-.footer_content{
-    position:absolute;
-   bottom: 0;  /* on le colle en bas */
-   width:100%;
-   height:100px;   /* Hauteur du pied de page */
 }
 .txt_cgu{
    text-align: center;
