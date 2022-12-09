@@ -24,16 +24,16 @@ class PanierController extends AbstractController
                 $p = $produit;
             }
         }
-
+      
         if ($p==null) {
             $p = $repo->find($id);
             $p->quantite = 1;
             $tab[] = $p;
-        }
+            
+        }  
         else {
             $p->quantite++;
         }
-
 
 
 

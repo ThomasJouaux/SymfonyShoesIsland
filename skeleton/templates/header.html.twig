@@ -9,7 +9,11 @@
 				<div class="collapse navbar-collapse" id="navbarColor02" bis_skin_checked="1">
 					<div>
 						<a href="/panier">panier
-							{{ panier | length }}</a>
+							{% set total = 0 %}
+							{% for item in panier %}
+								{% set total = total + item.quantite %}
+							{% endfor %}
+							{{ total }}</a>
 					</div>
 					<ul class="navbar-nav me-auto">
 						<li class="nav-item dropdown">
